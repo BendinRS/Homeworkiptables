@@ -60,7 +60,7 @@ Vagrant.configure("2") do |config|
         
         case boxname.to_s
         when "inetRouter2"
-            box.vm.network "forwarded_port", guest: 8080, host: 80, host_ip: "127.0.0.1"
+            box.vm.network "forwarded_port", guest: 8080, host: 28015, host_ip: "127.0.0.1"
         when "centralRouter"
           box.vm.provision "shell", run: "always", inline: <<-SHELL
             echo "GATEWAY=192.168.255.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1

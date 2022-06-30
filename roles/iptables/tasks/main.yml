@@ -49,11 +49,11 @@
       dest: /etc/sysconfig/network-scripts/route-eth1
     when: (ansible_hostname == "centralServer")
   
-  - name: copy inetRouter2
-    template:
-      src: ./files/iptables
-      dest: /etc/sysconfig/
-    when: (ansible_hostname == "inetRouter2")
+  # - name: copy inetRouter2
+  #   template:
+  #     src: ./files/iptables
+  #     dest: /etc/sysconfig/
+  #   when: (ansible_hostname == "inetRouter2")
 
 
   - name: restart network

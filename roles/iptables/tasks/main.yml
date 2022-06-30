@@ -49,6 +49,9 @@
       dest: /etc/sysconfig/network-scripts/route-eth1
     when: (ansible_hostname == "centralServer")
 
+    - name: stop iptables-services inetRouter2
+    shell: systemctl stop iptables
+  
   - name: copy inetRouter2
     template:
       src: ./files/iptables.j2
@@ -61,7 +64,7 @@
       name: network
       state: restarted 
 
-  - name: restart iptables-services inetRouter2
-    shell: systemctl restart iptables
+  - name: start iptables-services inetRouter2
+    shell: systemctl start iptables
 
 

@@ -27,6 +27,6 @@
 
 Реализация в скрине
 https://i.ibb.co/VqNP9Xz/1.png
-![Альтернативный текст](https://i.ibb.co/VqNP9Xz/1.png)
+   ![Альтернативный текст](https://i.ibb.co/VqNP9Xz/1.png)
 
 

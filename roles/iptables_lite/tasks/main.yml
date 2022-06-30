@@ -52,11 +52,11 @@
     when: (ansible_hostname == "inetRouter2")
 
   - name: append iptables-services inetRouter
-    shell: iptables -t nat -A POSTROUTING -d 192.168.0.0/16 -o eth0 -j MASQUERADE
+    shell: iptables -t nat -A POSTROUTING ! -d 192.168.0.0/16 -o eth0 -j MASQUERADE
     when: (ansible_hostname == "inetRouter")
 
   - name: append iptables-services centralRouter
-    shell: iptables -t nat -A POSTROUTING -d 192.168.0.0/16 -o eth1 -j MASQUERADE
+    shell: iptables -t nat -A POSTROUTING ! s-d 192.168.0.0/16 -o eth1 -j MASQUERADE
     when: (ansible_hostname == "inetRouter")
 
 

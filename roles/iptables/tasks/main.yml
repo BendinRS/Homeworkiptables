@@ -57,7 +57,7 @@
 
   - name: restart iptables-services inetRouter2
     service:
-      name: iptables-services
+      name: iptables
       state: restarted 
     when: (ansible_hostname == "inetRouter2")
 

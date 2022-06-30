@@ -20,4 +20,3 @@ COMMIT
 -A FORWARD -p tcp --dport 80 -j ACCEPT
 -A POSTROUTING -p tcp -j ACCEPT
 COMMIT
-~   

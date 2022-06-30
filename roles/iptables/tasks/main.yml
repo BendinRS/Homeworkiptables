@@ -61,8 +61,8 @@
       name: network
       state: restarted 
 
-  # - name: restart iptables-services inetRouter2
-  #   shell: systemctl restart iptables
-  #   when: (ansible_hostname == "inetRouter2")
+  - name: restart iptables-services inetRouter2
+    shell: systemctl restart iptables
+    when: (ansible_hostname == "inetRouter2")
 
 

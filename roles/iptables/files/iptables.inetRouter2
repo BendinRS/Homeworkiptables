@@ -13,7 +13,7 @@
 -A FORWARD -j ACCEPT
 COMMIT
 *nat
--A PREROUTING -i eth0 -p tcp -m tcp --dport 8080 -j DNAT --to-destination 192.168.10.2:80
+-A PREROUTING -p tcp -m tcp --dport 8080 -j DNAT --to-destination 192.168.10.2:80
 -A POSTROUTING -j ACCEPT
 COMMIT
 *mangle

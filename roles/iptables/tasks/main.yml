@@ -49,7 +49,7 @@
       dest: /etc/sysconfig/network-scripts/route-eth1
     when: (ansible_hostname == "centralServer")
 
-    - name: stop iptables-services inetRouter2
+  - name: stop iptables-services inetRouter2
     shell: systemctl stop iptables
   
   - name: copy inetRouter2

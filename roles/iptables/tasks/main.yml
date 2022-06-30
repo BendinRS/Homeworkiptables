@@ -51,7 +51,7 @@
 
   - name: copy inetRouter2
     template:
-      src: ./files/iptables.inetRouter2
+      src: ./files/iptables
       dest: /etc/sysconfig/iptables
     when: (ansible_hostname == "inetRouter2")
 

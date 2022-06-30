@@ -23,5 +23,9 @@
 
 реализовать knocking port
 
+[Помощь](https://otus.ru/nest/post/267/) в настройке 
+
+Реализация в скрине
+![Альтернативный текст](https://i.ibb.co/VqNP9Xz/1.png)
 
 

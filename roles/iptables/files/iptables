@@ -16,7 +16,3 @@ COMMIT
 -A PREROUTING -p tcp --dport 8080 -j DNAT --to-destination 192.168.10.2:80
 -A POSTROUTING --destination 192.168.10.2 -j SNAT --to-source 192.168.255.2
 COMMIT
-*mangle
--A FORWARD -p tcp --dport 80 -j ACCEPT
--A POSTROUTING -p tcp -j ACCEPT
-COMMIT

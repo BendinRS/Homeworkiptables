@@ -24,18 +24,18 @@
       enabled: yes
     when: (ansible_hostname == "centralServer")
 
-  - hosts: no_inet
   - name: disable default route
     lineinfile:
       dest: /etc/sysconfig/network-scripts/ifcfg-eth0
       line: DEFROUTE=no
+    when: inventory_hostname in groups['no_inet']
 
-  - hosts: routers
   - name: set up forward packages across routers
     sysctl:
       name: net.ipv4.conf.all.forwarding
       value: '1'
       state: present
+    when: inventory_hostname in groups['routers']
 
   - name: copy route_inetRouter2
     template:

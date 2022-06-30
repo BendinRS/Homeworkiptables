@@ -51,6 +51,14 @@
     shell: iptables -t nat -A PREROUTING -p tcp --dport 8080 -j DNAT --to-destination 192.168.10.2:80
     when: (ansible_hostname == "inetRouter2")
 
+  - name: append iptables-services inetRouter
+    shell: iptables -t nat -A POSTROUTING -d 192.168.0.0/16 -o eth0 -j MASQUERADE
+    when: (ansible_hostname == "inetRouter")
+
+  - name: append iptables-services centralRouter
+    shell: iptables -t nat -A POSTROUTING -d 192.168.0.0/16 -o eth0 -j MASQUERADE
+    when: (ansible_hostname == "inetRouter")
+
   - name: append iptables-services inetRouter2
     shell: iptables -t nat -A POSTROUTING --destination 192.168.10.2 -j SNAT --to-source 192.168.255.2
     when: (ansible_hostname == "inetRouter2")

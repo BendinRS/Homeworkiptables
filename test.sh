@@ -1,2 +1,2 @@
 vagrant up
-ansible-playbook ./roles/iptables/tests/test.yml
+ansible-playbook ./roles/iptables_lite/tests/test.yml

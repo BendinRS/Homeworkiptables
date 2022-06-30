@@ -1,0 +1,65 @@
+---
+# tasks file for iptables
+
+  - name: install packages
+    yum:
+      state: present
+      name:
+        - tcpdump
+        - epel-release
+
+  - name: install nginx centralServer
+    yum:
+      state: present
+      name:
+        - nginx
+    when: (ansible_hostname == "centralServer")
+
+  - name: enable nginx service centralServer
+    service:
+      name: nginx
+      state: started 
+      enabled: yes
+    when: (ansible_hostname == "centralServer")
+
+  - name: disable default route
+    lineinfile:
+      dest: /etc/sysconfig/network-scripts/ifcfg-eth0
+      line: DEFROUTE=no
+    when: inventory_hostname in groups['no_inet']
+
+  - name: set up forward packages across routers
+    sysctl:
+      name: net.ipv4.conf.all.forwarding
+      value: '1'
+      state: present
+    when: inventory_hostname in groups['routers']
+
+  - name: copy route_inetRouter2
+    template:
+      src: ./files/route-eth1.inetRouter2
+      dest: /etc/sysconfig/network-scripts/route-eth1
+    when: (ansible_hostname == "inetRouter2")
+
+  - name: copy centralServer
+    template:
+      src: ./files/route-eth1.centralServer
+      dest: /etc/sysconfig/network-scripts/route-eth1
+    when: (ansible_hostname == "centralServer")
+  
+  - name: append iptables-services inetRouter2
+    shell: iptables -t nat -A PREROUTING -p tcp --dport 8080 -j DNAT --to-destination 192.168.10.2:80
+    when: (ansible_hostname == "inetRouter2")
+
+  - name: append iptables-services inetRouter2
+    shell: iptables -t nat -A POSTROUTING --destination 192.168.10.2 -j SNAT --to-source 192.168.255.2
+    when: (ansible_hostname == "inetRouter2")
+
+  - name: restart network
+    service:
+      name: network
+      state: restarted 
+
+
+
+

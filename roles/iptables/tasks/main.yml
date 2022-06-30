@@ -8,16 +8,16 @@
         - tcpdump
         - iptables
         - iptables-services
+        - epel-release
 
-  - name: install packages centralRouter
+  - name: install nginx centralServer
     yum:
       state: present
       name:
-        - epel-release
         - nginx
     when: (ansible_hostname == "centralServer")
 
-  - name: enable nginx service centralRouter
+  - name: enable nginx service centralServer
     service:
       name: nginx
       state: started 
@@ -28,14 +28,18 @@
     lineinfile:
       dest: /etc/sysconfig/network-scripts/ifcfg-eth0
       line: DEFROUTE=no
-    when: (ansible_hostname !== "inetRouter")
+    when: (ansible_hostname == "inetRouter2") or
+          (ansible_hostname == "centralRouter")
+          (ansible_hostname == "centralServer")
 
   - name: set up forward packages across routers
     sysctl:
       name: net.ipv4.conf.all.forwarding
       value: '1'
       state: present
-    when: (ansible_hostname !== "centralServer")
+    when: (ansible_hostname == "inetRouter") or
+          (ansible_hostname == "inetRouter2") or
+          (ansible_hostname == "centralRouter")
 
   - name: copy route_inetRouter2
     template:

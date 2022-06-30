@@ -16,6 +16,7 @@ MACHINES = {
         #:public => {:ip => '10.10.10.1', :adapter => 1},
         :net => [
                    {ip: '192.168.255.2', adapter: 2, netmask: "255.255.255.248", virtualbox__intnet: "router-net"},
+                   {ip: '192.168.50.11', adapter: 8},
                 ]
     },
   :centralRouter => {

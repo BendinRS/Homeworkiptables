@@ -62,7 +62,7 @@
       state: restarted 
 
   - name: restart iptables-services inetRouter2
-    shell: sudo systemctl restart iptables
+    shell: systemctl restart iptables
     when: (ansible_hostname == "inetRouter2")
 
 

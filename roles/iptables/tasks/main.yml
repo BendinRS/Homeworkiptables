@@ -24,22 +24,18 @@
       enabled: yes
     when: (ansible_hostname == "centralServer")
 
+  - hosts: no_inet
   - name: disable default route
     lineinfile:
       dest: /etc/sysconfig/network-scripts/ifcfg-eth0
       line: DEFROUTE=no
-    when: (ansible_hostname == "inetRouter2") or
-          (ansible_hostname == "centralRouter")
-          (ansible_hostname == "centralServer")
 
+  - hosts: routers
   - name: set up forward packages across routers
     sysctl:
       name: net.ipv4.conf.all.forwarding
       value: '1'
       state: present
-    when: (ansible_hostname == "inetRouter") or
-          (ansible_hostname == "inetRouter2") or
-          (ansible_hostname == "centralRouter")
 
   - name: copy route_inetRouter2
     template:
